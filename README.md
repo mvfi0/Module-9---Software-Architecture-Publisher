@@ -53,3 +53,14 @@ connects to the RabbitMQ broker, publishes 5 `user_created` events to the
 prints it via the `UserCreatedHandler::handle` method. Producer and consumer
 never communicate directly — RabbitMQ is the intermediary, which is why I can
 start and stop either side independently without affecting the other.
+
+## Monitoring Chart
+
+![RabbitMQ message rates](screenshots/rabbitmq-message-rates.jpeg)
+
+Each `cargo run` of the publisher produces a burst of 5 messages, which
+appears as a vertical spike in the "Message rates" chart in RabbitMQ's UI.
+The spike's height corresponds to the publish rate within that short window.
+Because the subscriber consumes them quickly (no artificial delay yet), the
+queue itself stays near zero — the messages flow through almost as fast as
+they arrive.
