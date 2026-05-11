@@ -39,3 +39,17 @@ which acts as a rendezvous point.
 
 RabbitMQ is running locally via Docker on port 5672 (AMQP) and port 15672
 (management UI), using the default `guest` / `guest` credentials.
+
+## Sending and Processing Events
+
+![Publisher console](screenshots/publisher-console.jpeg)
+![Subscriber console](screenshots/subscriber-console.jpeg)
+![RabbitMQ connections](screenshots/rabbitmq-connections.jpeg)
+
+When `cargo run` is executed in the publisher directory, the publisher process
+connects to the RabbitMQ broker, publishes 5 `user_created` events to the
+`user_created` queue, and exits. The subscriber, which has been idle in its
+`loop {}` waiting for incoming events, picks each one up from the queue and
+prints it via the `UserCreatedHandler::handle` method. Producer and consumer
+never communicate directly — RabbitMQ is the intermediary, which is why I can
+start and stop either side independently without affecting the other.
