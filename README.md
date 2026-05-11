@@ -32,3 +32,10 @@ connect to the same broker:
 The whole point of the architecture is that publisher and subscriber don't
 talk to each other directly — they meet at this shared address (the broker),
 which acts as a rendezvous point.
+
+## RabbitMQ Running
+
+![RabbitMQ dashboard](screenshots/rabbitmq-dashboard.jpeg)
+
+RabbitMQ is running locally via Docker on port 5672 (AMQP) and port 15672
+(management UI), using the default `guest` / `guest` credentials.
